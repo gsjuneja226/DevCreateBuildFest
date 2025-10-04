@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoLearn - Environmental Education Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container flex items-center justify-between">
+            <div class="logo">
+                <h2>🌱 EcoManiaX</h2>
+            </div>
+            <nav class="nav">
+                <button class="nav-btn active" data-s   ection="dashboard">Dashboard</button>
+                <button class="nav-btn" data-section="games">Games</button>
+                <button class="nav-btn" data-section="challenges">Challenges</button>
+                <button class="nav-btn" data-section="learning">Learning</button>
+                <button class="nav-btn"> <a href="plant detection\index.html">Disease Recognizer</a></button>
+                
+                <button class="nav-btn" data-section="profile">Profile</button>
+            </nav>
+            <div class="user-info">
+                <div class="points-display">🏆 <span id="userPoints">2840</span></div>
+                <div class="user-avatar">🌟</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section active">
+            <div class="container">
+                <div class="welcome-banner">
+                    <h1>Welcome back, Arya! 🌟</h1>
+                    <p>Continue your environmental journey and make a difference today!</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">🌳</div>
+                        <div class="stat-content">
+                            <h3>Trees Planted</h3>
+                            <div class="stat-number">2,456</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">♻️</div>
+                        <div class="stat-content">
+                            <h3>E-Waste Reduced (kg)</h3>
+                            <div class="stat-number">1,847.3</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🔋</div>
+                        <div class="stat-content">
+                            <h3>Carbon Offset (tons)</h3>
+                            <div class="stat-number">156.8</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-content">
+                            <h3>Students Engaged</h3>
+                            <div class="stat-number">3,420</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="daily-challenges card">
+                        <h3>Daily Challenges 🎯</h3>
+                        <div id="dailyChallengesList"></div>
+                    </div>
+                    
+                    <div class="leaderboard-preview card">
+                        <h3>Top Students 🏆</h3>
+                        <div id="topStudentsList"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning Section -->
+        <section id="learning" class="section">
+            <div class="container">
+                <h1>Learning Modules 📚</h1>
+                
+                <div class="difficulty-filter">
+                    <button class="filter-btn active" data-difficulty="all">All Levels</button>
+                    <button class="filter-btn" data-difficulty="beginner">Beginner</button>
+                    <button class="filter-btn" data-difficulty="intermediate">Intermediate</button>
+                    <button class="filter-btn" data-difficulty="advanced">Advanced</button>
+                    <button class="filter-btn" data-difficulty="expert">Expert</button>
+                </div>
+
+                <div class="learning-categories">
+                    <div class="category-grid" id="learningModules"></div>
+                </div>
+
+                <!-- Module Detail Modal -->
+                <div class="modal hidden" id="moduleModal">
+                    <div class="modal-content">
+                        <button class="modal-close">&times;</button>
+                        <div id="moduleContent"></div>
+                    </div>
+                </div>
+
+                <!-- Quiz Modal -->
+                <div class="modal hidden" id="quizModal">
+                    <div class="modal-content">
+                        <button class="modal-close">&times;</button>
+                        <div id="quizContent"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Challenges Section -->
+        <section id="challenges" class="section">
+            <div class="container">
+                <h1>Environmental Challenges 🎯</h1>
+                
+                <div class="challenge-filter">
+                    <button class="filter-btn active" data-type="all">All</button>
+                    <button class="filter-btn" data-type="daily">Daily</button>
+                    <button class="filter-btn" data-type="weekly">Weekly</button>
+                    <button class="filter-btn" data-type="monthly">Monthly</button>
+                    <button class="filter-btn" data-type="team">Team</button>
+                </div>
+
+                <div class="challenges-grid" id="challengesList"></div>
+
+                <!-- Challenge Detail Modal -->
+                <div class="modal hidden" id="challengeModal">
+                    <div class="modal-content">
+                        <button class="modal-close">&times;</button>
+                        <div id="challengeContent"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Compete Section -->
+        <section id="compete" class="section">
+            <div class="container">
+                <h1>Competition Hub 🏆</h1>
+                
+                <div class="compete-tabs">
+                    <button class="tab-btn active" data-tab="leaderboards">Leaderboards</button>
+                    <button class="tab-btn" data-tab="tournaments">Tournaments</button>
+                    <button class="tab-btn" data-tab="achievements">Achievements</button>
+                </div>
+
+                <div class="compete-content">
+                    <div class="tab-content active" id="leaderboards">
+                        <div class="leaderboard-filters">
+                            <button class="filter-btn active" data-scope="school">School</button>
+                            <button class="filter-btn" data-scope="regional">Regional</button>
+                            <button class="filter-btn" data-scope="national">National</button>
+                            <button class="filter-btn" data-scope="global">Global</button>
+                        </div>
+                        <div class="leaderboard-content" id="leaderboardContent"></div>
+                    </div>
+
+                    <div class="tab-content" id="tournaments">
+                        <div class="tournaments-grid" id="tournamentsList"></div>
+                    </div>
+
+                    <div class="tab-content" id="achievements">
+                        <div class="achievements-grid" id="achievementsList"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Games Section -->
+        <section id="games" class="section">
+            <div class="container">
+                <h1>Environmental Games 🎮</h1>
+                
+                <div class="games-grid" id="gamesList"></div>
+
+                <!-- Game Modal -->
+                <div class="modal hidden" id="gameModal">
+                    <div class="modal-content game-modal-content">
+                        <button class="modal-close">&times;</button>
+                        <div id="gameContent"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Profile Section -->
+        <section id="profile" class="section">
+            <div class="container">
+                <div class="profile-header">
+                    <div class="profile-avatar">🌟</div>
+                    <div class="profile-info">
+                        <h1>Arya Sharma</h1>
+                        <div class="profile-level">Eco Champion - Level 15</div>
+                        <div class="profile-school">Green Valley High School</div>
+                    </div>
+                </div>
+
+                <div class="profile-tabs">
+                    <button class="tab-btn active" data-tab="stats">Statistics</button>
+                    <button class="tab-btn" data-tab="badges">Badges</button>
+                    <button class="tab-btn" data-tab="journal">Journal</button>
+                    <button class="tab-btn" data-tab="goals">Goals</button>
+                    <button class="tab-btn" data-tab="friends">Friends</button>
+                </div>
+
+                <div class="profile-content">
+                    <div class="tab-content active" id="stats">
+                        <div class="stats-overview">
+                            <div class="chart-container" style="position: relative; height: 300px;">
+                                <canvas id="impactChart"></canvas>
+                            </div>
+                            <div class="detailed-stats" id="detailedStats"></div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="badges">
+                        <div class="badges-grid" id="badgesGrid"></div>
+                    </div>
+
+                    <div class="tab-content" id="journal">
+                        <div class="journal-section">
+                            <div class="journal-entry-form">
+                                <textarea placeholder="Write about your environmental activities today..." id="journalEntry"></textarea>
+                                <button class="btn btn--primary" onclick="addJournalEntry()">Add Entry</button>
+                            </div>
+                            <div class="journal-entries" id="journalEntries"></div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="goals">
+                        <div class="goals-section" id="goalsSection"></div>
+                    </div>
+
+                    <div class="tab-content" id="friends">
+                        <div class="friends-section" id="friendsSection"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Success Message -->
+    <div class="success-message hidden" id="successMessage">
+        <div class="success-content">
+            <div class="success-icon">🎉</div>
+            <div class="success-text"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

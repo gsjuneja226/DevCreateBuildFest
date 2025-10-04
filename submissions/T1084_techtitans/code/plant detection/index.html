@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Disease Detection System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>Plant Disease Detection System</h1>
+            <p class="subtitle">Advanced AI-powered plant health analysis for early disease detection and treatment recommendations</p>
+        </header>
+
+        <!-- Tips Section -->
+        <section class="tips-section card">
+            <h3>📸 Photography Tips for Best Results</h3>
+            <div class="tips-grid">
+                <div class="tip">✓ Take photos in good lighting conditions</div>
+                <div class="tip">✓ Capture the entire affected leaf when possible</div>
+                <div class="tip">✓ Include multiple leaves showing symptoms</div>
+                <div class="tip">✓ Avoid blurry or out-of-focus images</div>
+                <div class="tip">✓ Show both upper and lower leaf surfaces if symptoms are present</div>
+            </div>
+        </section>
+
+        <!-- Upload Section -->
+        <section class="upload-section">
+            <div class="upload-container card">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-content">
+                        <div class="upload-icon">🌱</div>
+                        <h3>Upload Plant Image</h3>
+                        <p>Drag and drop your plant image here, or click to browse</p>
+                        <input type="file" id="fileInput" accept="image/*" class="hidden">
+                        <div class="upload-buttons">
+                            <button class="btn btn--primary" onclick="document.getElementById('fileInput').click()">
+                                Choose File
+                            </button>
+                            <button class="btn btn--secondary" id="cameraBtn">
+                                📷 Camera
+                            </button>
+                        </div>
+                    </div>
+                    <div class="upload-progress hidden" id="uploadProgress">
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                        <p>Processing image...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Image Preview -->
+            <div class="image-preview-container card hidden" id="imagePreviewContainer">
+                <div class="preview-header">
+                    <h3>Image Preview</h3>
+                    <button class="btn btn--secondary btn--sm" id="clearBtn">Clear</button>
+                </div>
+                <div class="image-preview" id="imagePreview">
+                    <img id="previewImg" alt="Plant image preview">
+                    <div class="image-info" id="imageInfo"></div>
+                </div>
+                <div class="analysis-controls">
+                    <button class="btn btn--primary btn--lg" id="analyzeBtn">
+                        🔍 Analyze Plant
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Analysis Section -->
+        <section class="analysis-section hidden" id="analysisSection">
+            <div class="loading-container card" id="loadingContainer">
+                <div class="loading-animation">
+                    <div class="plant-loader">🌿</div>
+                </div>
+                <h3>Analyzing Plant Health...</h3>
+                <p>Our AI is examining your plant image for signs of disease</p>
+                <div class="analysis-steps">
+                    <div class="step active" data-step="1">
+                        <span class="step-number">1</span>
+                        <span class="step-text">Processing Image</span>
+                    </div>
+                    <div class="step" data-step="2">
+                        <span class="step-number">2</span>
+                        <span class="step-text">Detecting Plant Type</span>
+                    </div>
+                    <div class="step" data-step="3">
+                        <span class="step-number">3</span>
+                        <span class="step-text">Analyzing Symptoms</span>
+                    </div>
+                    <div class="step" data-step="4">
+                        <span class="step-number">4</span>
+                        <span class="step-text">Generating Report</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="results-section hidden" id="resultsSection">
+            <div class="results-header">
+                <h2>Analysis Results</h2>
+                <div class="results-actions">
+                    <button class="btn btn--secondary btn--sm" id="exportBtn">📄 Export Report</button>
+                    <button class="btn btn--outline btn--sm" id="printBtn">🖨️ Print</button>
+                </div>
+            </div>
+
+            <div class="results-grid">
+                <!-- Main Result Card -->
+                <div class="result-card card">
+                    <div class="result-header">
+                        <div class="result-status" id="resultStatus">
+                            <span class="status-icon" id="statusIcon">❌</span>
+                            <span class="status-text" id="statusText">Disease Detected</span>
+                        </div>
+                        <div class="confidence-score" id="confidenceScore">95%</div>
+                    </div>
+                    <div class="result-content">
+                        <h3 id="plantType">Plant Type: Tomato</h3>
+                        <h4 id="diseaseName">Early Blight</h4>
+                        <div class="result-details">
+                            <div class="detail-section">
+                                <h5>🔍 Symptoms Identified</h5>
+                                <p id="symptoms">Dark spots with concentric rings on older leaves, yellowing and wilting</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Treatment Card -->
+                <div class="treatment-card card">
+                    <h3>💊 Treatment Recommendations</h3>
+                    <div class="treatment-content" id="treatmentContent">
+                        <p>Apply fungicide, improve air circulation, remove affected leaves</p>
+                    </div>
+                    <div class="urgency-indicator" id="urgencyIndicator">
+                        <span class="urgency-level">⚠️ Moderate Urgency</span>
+                        <p>Begin treatment within 3-5 days</p>
+                    </div>
+                </div>
+
+                <!-- Prevention Card -->
+                <div class="prevention-card card">
+                    <h3>🛡️ Prevention Tips</h3>
+                    <div class="prevention-content" id="preventionContent">
+                        <p>Avoid overhead watering, plant resistant varieties, crop rotation</p>
+                    </div>
+                </div>
+
+                <!-- Additional Info Card -->
+                <div class="info-card card">
+                    <h3>ℹ️ Additional Information</h3>
+                    <div class="info-tabs">
+                        <button class="tab-btn active" data-tab="about">About Disease</button>
+                        <button class="tab-btn" data-tab="spread">How it Spreads</button>
+                        <button class="tab-btn" data-tab="resources">Resources</button>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="aboutTab">
+                            <p>Early blight is a common fungal disease that affects tomato plants, particularly during warm, humid conditions.</p>
+                        </div>
+                        <div class="tab-pane" id="spreadTab">
+                            <p>The disease spreads through airborne spores and water splash. It typically starts on lower, older leaves and progresses upward.</p>
+                        </div>
+                        <div class="tab-pane" id="resourcesTab">
+                            <ul>
+                                <li><a href="#" target="_blank">University Extension Guide</a></li>
+                                <li><a href="#" target="_blank">Fungicide Application Guidelines</a></li>
+                                <li><a href="#" target="_blank">Resistant Variety Database</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="results-actions-bottom">
+                <button class="btn btn--primary" id="newAnalysisBtn">🔄 Analyze New Image</button>
+                <button class="btn btn--secondary" id="viewHistoryBtn">📊 View History</button>
+            </div>
+        </section>
+
+        <!-- History Modal -->
+        <div class="modal hidden" id="historyModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Analysis History</h3>
+                    <button class="modal-close" id="closeHistoryModal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="history-list" id="historyList">
+                        <!-- History items will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2025 Plant Disease Detection System. For educational and research purposes.</p>
+            <p class="disclaimer">This is a demonstration system. Please consult agricultural experts for professional diagnosis.</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
